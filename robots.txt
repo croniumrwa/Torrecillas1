@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+
+# Sitemap location (replace with actual URL when deployed)
+Sitemap: https://torrecillasblancas.com/sitemap.xml
+
+# Disallow common sensitive paths
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*.log$
+Disallow: /config/
+
+# Allow crawling of CSS, JS, and images
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.gif$
+Allow: /*.svg$
+Allow: /*.ico$

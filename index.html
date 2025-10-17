@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostal Torrecillas Blancas - Tu Posada en Tigre</title>
+    <meta name="description" content="Hostal familiar en Tigre con habitaciones acogedoras. Atención personalizada, ubicación privilegiada cerca de Parque de la Costa, Puerto de Frutos y Museo de Arte. Reserva directa sin intermediarios.">
+    <meta name="keywords" content="hostal tigre, alojamiento tigre, hostal torrecillas blancas, habitaciones tigre, turismo tigre, delta tigre">
+    <meta name="author" content="Torrecillas Blancas">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://torrecillasblancas.com/">
+    <meta property="og:title" content="Hostal Torrecillas Blancas - Tu Hogar en Tigre">
+    <meta property="og:description" content="Hostal familiar en Tigre con habitaciones acogedoras. Atención personalizada, ubicación privilegiada cerca de Parque de la Costa, Puerto de Frutos y Museo de Arte.">
+    <meta property="og:image" content="https://i.imgur.com/t1o391X.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://torrecillasblancas.com/">
+    <meta property="twitter:title" content="Hostal Torrecillas Blancas - Tu Hogar en Tigre">
+    <meta property="twitter:description" content="Hostal familiar en Tigre con habitaciones acogedoras. Atención personalizada, ubicación privilegiada cerca de Parque de la Costa, Puerto de Frutos y Museo de Arte.">
+    <meta property="twitter:image" content="https://i.imgur.com/t1o391X.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon.png">
+    <link rel="apple-touch-icon" href="./images/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Change all blue text to dark green */
+        a {
+            color: #0f2118;
+        }
+        a:hover {
+            color: #1a3526;
+        }
+        .text-blue-500, .text-blue-600, .text-blue-700,
+        .text-blue-800, .text-blue-900 {
+            color: #0f2118 !important;
+        }
+        .hover\:text-blue-500:hover, .hover\:text-blue-600:hover,
+        .hover\:text-blue-700:hover, .hover\:text-blue-800:hover,
+        .hover\:text-blue-900:hover {
+            color: #1a3526 !important;
+        }
+        .bg-blue-500, .bg-blue-600 {
+            background-color: #0f2118 !important;
+        }
+        .hover\:bg-blue-500:hover, .hover\:bg-blue-600:hover {
+            background-color: #1a3526 !important;
+        }
+
+        /* Estilos para el Modal de Galería */
+        .modal {
+            display: none; /* Oculto por defecto */
+            position: fixed;
+            z-index: 1000; 
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.88); /* Fondo negro con 88% de opacidad (equivalente a gris 12% opaco) */
+            padding-top: 60px;
+        }
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow: hidden;
+            border-radius: 12px;
+            position: relative;
+        }
+        .modal-image {
+            width: 100%;
+            height: auto;
+            max-height: 70vh;
+            object-fit: contain;
+            transition: opacity 0.3s;
+            border-radius: 12px; 
+        }
+        /* Botón de cerrar */
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+            z-index: 1010;
+        }
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Controles de la galería */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -50px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Contenedor de miniaturas */
+        .thumbnail-container {
+            text-align: center;
+            padding: 10px;
+            background-color: #111;
+            white-space: nowrap;
+            overflow-x: auto;
+        }
+        .thumbnail {
+            opacity: 0.6;
+            cursor: pointer;
+            width: 70px;
+            height: 50px;
+            object-fit: cover;
+            margin: 0 5px;
+            border: 2px solid transparent;
+            display: inline-block;
+            transition: opacity 0.3s, border-color 0.3s;
+            border-radius: 12px; 
+        }
+        .active-thumb, .thumbnail:hover {
+            opacity: 1;
+            border-color: #fff;
+        }
+        /* Estilos para el Menú Móvil - Aparece debajo de la nav */
+        #mobile-menu {
+            display: none;
+            /* Usamos z-index menor que la nav principal (z-50) pero alto */
+            z-index: 40; 
+            top: 100px; /* Colocar debajo de la nav fija */
+            /* La nav tiene un my-4 y es de h-16, 16+16=32px (aprox) */
+            padding-top: 10px;
+        }
+        #mobile-menu.open {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-green-500 focus:text-white focus:rounded">Saltar al contenido principal</a>
+
+    <!-- BARRA DE NAVEGACIÓN FIJA Y CENTRADA (NAVBAR) -->
+    <nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 max-w-7xl mx-4 lg:mx-auto my-4 bg-white rounded-xl shadow-lg px-4 py-2 flex justify-between items-center transition-all duration-300" role="navigation" aria-label="Menú Principal">
+        <!-- Izquierda: Links de Navegación (Visibles solo en desktop) -->
+        <div class="hidden md:flex flex-1 space-x-6">
+            <a href="#main-content" class="text-gray-700 hover:text-[#0f2118] font-medium transition duration-300">Inicio</a>
+            <a href="#habitaciones" class="text-gray-700 hover:text-[#0f2118] font-medium transition duration-300">Habitaciones</a>
+        </div>
+
+        <!-- Centro: Logo (Siempre visible y centrado) -->
+        <div class="mx-auto md:absolute md:left-1/2 md:transform md:-translate-x-1/2 flex-shrink-0">
+            <img src="./images/logo.png" alt="Torrecillas Blancas Logo" class="h-16 w-auto object-contain">
+        </div>
+
+        <!-- Derecha: Links de Navegación (Visibles solo en desktop) -->
+        <div class="hidden md:flex flex-1 justify-end space-x-6">
+            <a href="#atracciones" class="text-gray-700 hover:text-[#0f2118] font-medium transition duration-300">Atracciones</a>
+            <a href="#contacto" class="text-gray-700 hover:text-[#0f2118] font-medium transition duration-300">Contacto</a>
+        </div>
+        
+        <!-- Botón de Menú Móvil (Solo visible en mobile) -->
+        <button id="mobile-menu-button" class="md:hidden p-2 rounded-full text-gray-700 hover:text-[#0f2118] transition duration-300" aria-label="Abrir Menú de Navegación">
+            <i data-feather="menu" id="menu-icon"></i>
+        </button>
+    </nav>
+    
+    <!-- MENÚ HAMBURGUESA DESPLEGABLE (MÓVIL) -->
+    <div id="mobile-menu" class="fixed left-0 right-0 z-40 max-w-7xl mx-4 lg:mx-auto mt-[90px] bg-white rounded-xl shadow-xl px-4 py-4 md:hidden">
+        <div class="flex flex-col space-y-3 text-center">
+            <a href="#main-content" onclick="closeMobileMenu()" class="text-gray-700 hover:text-[#0f2118] font-medium transition duration-300 py-1 border-b border-gray-100">Inicio</a>
+            <a href="#habitaciones" onclick="closeMobileMenu()" class="text-gray-700 hover:text-[#0f2118] font-medium transition duration-300 py-1 border-b border-gray-100">Habitaciones</a>
+            <a href="#atracciones" onclick="closeMobileMenu()" class="text-gray-700 hover:text-[#0f2118] font-medium transition duration-300 py-1 border-b border-gray-100">Atracciones</a>
+            <a href="#contacto" onclick="closeMobileMenu()" class="text-gray-700 hover:text-[#0f2118] font-medium transition duration-300 py-1">Contacto</a>
+        </div>
+    </div>
+
+
+<!-- Hero Section -->
+    <main id="main-content">
+    <section class="relative bg-cover bg-center h-screen flex items-center justify-center text-center text-white pt-32"
+             style="background-image: url('./images/hero-t1.jpeg');" role="banner" aria-label="Sección principal del Hostal Torrecillas Blancas">
+<div class="absolute inset-0 bg-black opacity-40"></div>
+<div class="relative z-10 px-4">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 animate__animated animate__zoomIn">Tu Posada Acogedora en el Corazón de Tigre</h1>
+            <p class="text-xl mb-8 animate__animated animate__zoomIn" style="animation-delay: 1s;">Un hostal con encanto, atención personalizada y la ubicación ideal para el disfrute de unos días inolvidables.</p>
+            <a href="https://wa.me/5491150372808?text=Hola!%20Quisiera%20consultar%20disponibilidad%20en%20Torrecillas%20Blancas.%20Me%20interesa%20la%20habitaci%C3%B3n%20[Escribir%20nombre%20de%20la%20habitaci%C3%B3n].%20Somos%20[Nro]%20adultos%20y%20[Nro]%20ni%C3%b1os,%20para%20las%20fechas%20[Escribir%20fechas].%20Gracias!" 
+               target="_blank" 
+               class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full text-lg transition duration-300 whitespace-normal break-words inline-block w-full sm:w-auto text-center animate__animated animate__pulse animate__infinite" style="animation-delay: 2s;">
+                Charlemos por WhatsApp
+            </a>
+</div>
+    </section>
+    <!-- Welcome Section -->
+    <section class="py-16 px-4 text-center max-w-4xl mx-auto">
+        <h2 class="text-3xl font-semibold mb-6 wow animate__animated animate__fadeInDown">Torrecillas Blancas, una experiencia cercana y familiar</h2>
+        <p class="text-lg wow animate__animated animate__fadeInUp">
+            ¡Tu refugio personal en el corazón de Tigre!
+
+Creamos este espacio como un escape a la tranquilidad para quienes buscan una experiencia auténtica. Ya sea que viajes en pareja buscando un rincón especial, en familia listo para crear recuerdos, o necesites una pausa del ritmo de la ciudad, te recibirá la atención cálida y dedicada de nosotros, tus anfitriones.
+
+Queremos que te sientas como en casa. And We speak English! 
+        </p>
+    </section>
+<!-- Rooms Section -->
+    <section id="habitaciones" class="py-16 px-4 max-w-6xl mx-auto">
+        <h2 class="text-3xl font-semibold text-center mb-12 wow animate__animated animate__fadeInDown">Nuestras Acogedoras Habitaciones</h2>
+        <!-- Room 1 - Suite Delta -->
+        <div class="grid md:grid-cols-2 gap-8 mb-16 items-center">
+            <div class="flex justify-start wow animate__animated animate__fadeInLeft relative group">
+                <!-- Imagen principal que abre el modal -->
+                <img src="./images/suite-delta-1.jpeg" 
+                     alt="Suite Delta" 
+                     class="rounded-lg shadow-md object-cover h-64 w-full cursor-pointer transition-opacity duration-300 group-hover:opacity-80" 
+                     loading="lazy"
+                     onclick="openModal('delta', 0)">
+                <!-- Botón de galería superpuesto - CLASE MODIFICADA: hover:bg-black -->
+                <button onclick="openModal('delta', 0)" class="absolute inset-0 m-auto w-32 h-10 bg-green-500 hover:bg-black text-white font-bold rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center shadow-lg">
+                    Ver Galería
+                    <i data-feather="image" class="w-4 h-4 ml-2"></i>
+                </button>
+            </div>
+            <div class="wow animate__animated animate__fadeInRight">
+                <h3 class="text-2xl font-semibold mb-3">Suite Delta</h3>
+                <p class="mb-4">Ideal para parejas o familias pequeñas. Amplia y luminosa, con baño privado en suite para total comodidad.</p>
+                <div class="flex space-x-4">
+                    <i data-feather="home"></i>
+                    <i data-feather="tv"></i>
+                    <i data-feather="wifi"></i>
+                    <i data-feather="wind"></i>
+                </div>
+            </div>
+        </div>
+        <!-- Room 2 - Rincón Isleño -->
+        <div class="grid md:grid-cols-2 gap-8 mb-16 items-center">
+            <div class="md:order-2 flex justify-end wow animate__animated animate__fadeInRight relative group">
+                 <!-- Imagen principal que abre el modal -->
+                <img src="./images/rincon-1.jpeg" 
+                     alt="Rincón Isleño" 
+                     class="rounded-lg shadow-md object-cover h-64 w-full cursor-pointer transition-opacity duration-300 group-hover:opacity-80" 
+                     loading="lazy"
+                     onclick="openModal('rincon', 0)">
+                <!-- Botón de galería superpuesto - CLASE MODIFICADA: hover:bg-black -->
+                <button onclick="openModal('rincon', 0)" class="absolute inset-0 m-auto w-32 h-10 bg-green-500 hover:bg-black text-white font-bold rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center shadow-lg">
+                    Ver Galería
+                    <i data-feather="image" class="w-4 h-4 ml-2"></i>
+                </button>
+            </div>
+            <div class="md:order-1 wow animate__animated animate__fadeInLeft">
+                <h3 class="text-2xl font-semibold mb-3">Rincón Isleño</h3>
+                <p class="mb-4">Perfecta para familias o amigos. Cuenta con baño privado de uso exclusivo ubicado fuera de la habitación, a solo unos pasos por el pasillo.</p>
+                <div class="flex space-x-4">
+                    <i data-feather="home"></i>
+                    <i data-feather="tv"></i>
+                    <i data-feather="wifi"></i>
+                    <i data-feather="airplay"></i>
+                </div>
+            </div>
+        </div>
+        <!-- Room 3 - Refugio del Puerto -->
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+            <div class="flex justify-start wow animate__animated animate__fadeInLeft relative group">
+                <!-- Imagen principal que abre el modal -->
+                <img src="./images/refugio-1.jpeg" 
+                     alt="Refugio del Puerto" 
+                     class="rounded-lg shadow-md object-cover h-64 w-full cursor-pointer transition-opacity duration-300 group-hover:opacity-80" 
+                     loading="lazy"
+                     onclick="openModal('refugio', 0)">
+                 <!-- Botón de galería superpuesto - CLASE MODIFICADA: hover:bg-black -->
+                 <button onclick="openModal('refugio', 0)" class="absolute inset-0 m-auto w-32 h-10 bg-green-500 hover:bg-black text-white font-bold rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center shadow-lg">
+                    Ver Galería
+                    <i data-feather="image" class="w-4 h-4 ml-2"></i>
+                </button>
+            </div>
+            <div class="wow animate__animated animate__fadeInRight">
+                <h3 class="text-2xl font-semibold mb-3">Refugio del Puerto</h3>
+                <p class="mb-4">Una opción cómoda y económica para disfrutar Tigre. Dispone de baño privado de uso exclusivo localizado justo al lado de la habitación.</p>
+                <div class="flex space-x-4">
+                    <i data-feather="home"></i>
+                    <i data-feather="wifi"></i>
+                    <i data-feather="tv"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Attractions Section -->
+    <section id="atracciones" class="py-16 px-4 max-w-6xl mx-auto text-center">
+        <h2 class="text-3xl font-semibold mb-6 wow animate__animated animate__fadeInDown">A Pasos de Todo lo que Tigre Ofrece</h2>
+        <p class="text-lg mb-10 wow animate__animated animate__fadeInUp">Nuestra ubicación es inmejorable. Olvídate del auto y sal a caminar para descubrir:</p>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="text-center wow animate__animated animate__zoomIn">
+                <a href="https://sturlaviajes.com.ar/" target="_blank" rel="noopener noreferrer">
+                    <img src="https://www.sturlaviajes.com.ar/src/img_up/11092024.0.peg" alt="Paseos en Lancha" class="rounded-lg mb-3 object-cover h-48 w-full hover:opacity-80 transition-opacity duration-300">
+                </a>
+                <p class="font-semibold">
+                    <a href="https://sturlaviajes.com.ar/" target="_blank" rel="noopener noreferrer" class="hover:underline">Paseos en Lancha</a>
+                </p>
+                <p class="text-sm">A minutos de la estacion fluvial de Tigre para recorrer el Delta a 0.6 km.</p>
+            </div>
+            <div class="text-center wow animate__animated animate__zoomIn" data-wow-delay="0.2s">
+                <a href="http://www.puertodefrutos-arg.com.ar/" target="_blank" rel="noopener noreferrer">
+                    <img src="https://www.tigre.gob.ar/public/assets/fotos_novedades/1580405828.jpg" alt="Puerto de Frutos" class="rounded-lg mb-3 object-cover h-48 w-full hover:opacity-80 transition-opacity duration-300">
+                </a>
+                <p class="font-semibold">
+                    <a href="http://www.puertodefrutos-arg.com.ar/" target="_blank" rel="noopener noreferrer" class="hover:underline">Puerto de Frutos</a>
+                </p>
+                <p class="text-sm">Visita el clásico mercado de artesanias y productos locales a 1.6 km.</p>
+            </div>
+            <div class="text-center wow animate__animated animate__zoomIn" data-wow-delay="0.4s">
+                <a href="https://www.mat.gob.ar/" target="_blank" rel="noopener noreferrer">
+                    <img src="https://www.tigre.gob.ar/public/assets/frontend/img/cultura/headers/museos.jpg" alt="Museo de arte de Tigre" class="rounded-lg mb-3 object-cover h-48 w-full hover:opacity-80 transition-opacity duration-300">
+                </a>
+                <p class="font-semibold">
+                    <a href="https://www.mat.gob.ar/" target="_blank" rel="noopener noreferrer" class="hover:underline">Museo de arte de Tigre</a>
+                </p>
+                <p class="text-sm">Descubre la joya arquitectónica y cultural de la ciudad a 2.0 km.</p>
+            </div>
+            <div class="text-center wow animate__animated animate__zoomIn" data-wow-delay="0.6s">
+                <a href="https://www.parquedelacosta.com.ar/" target="_blank" rel="noopener noreferrer">
+                    <img src="https://www.parquedelacosta.com.ar/wp-content/uploads/2025/06/El-Vigia-1200x800.jpg" alt="Parque de la Costa" class="rounded-lg mb-3 object-cover h-48 w-full hover:opacity-80 transition-opacity duration-300">
+                </a>
+                <p class="font-semibold">
+                    <a href="https://www.parquedelacosta.com.ar/" target="_blank" rel="noopener noreferrer" class="hover:underline">Parque de la Costa</a>
+                </p>
+                <p class="text-sm">Diversión asegurada para toda la familia a poca distancia a 1.3 km.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="py-16 px-4 max-w-4xl mx-auto text-center bg-white rounded-lg shadow-lg my-12">
+        <h2 class="text-3xl font-semibold mb-6 wow animate__animated animate__fadeInDown">Reserva Fácil, Rápida y sin Intermediarios</h2>
+        <p class="text-lg mb-8 wow animate__animated animate__fadeInUp">
+            Habla directamente con nosotros para consultar fechas, precios y sacarte todas las dudas. Te garantizamos una atención personalizada desde el primer momento.
+        </p>
+        <a href="https://wa.me/5491150372808?text=Hola!%20Quisiera%20consultar%20disponibilidad%20en%20Torrecillas%20Blancas.%20Me%20interesa%20la%20habitaci%C3%B3n%20[Escribir%20nombre%20de%20la%20habitaci%C3%B3n].%20Somos%20[Nro]%20adultos%20y%20[Nro]%20ni%C3%b1os,%20para%20las%20fechas%20[Escribir%20fechas].%20Gracias!" 
+           target="_blank" 
+           class="bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-full text-xl transition duration-300 inline-block mb-10 whitespace-normal break-words w-full sm:w-auto text-center wow animate__animated animate__pulse" data-wow-iteration="3">
+            ¡Quiero Reservar por WhatsApp!
+        </a>
+        <div class="text-left max-w-md mx-auto">
+            <p class="mb-2"><i data-feather="smartphone" class="inline mr-2"></i>Celular: +54 9 11 5037-2808</p>
+            <p class="mb-2"><i data-feather="phone" class="inline mr-2"></i>Teléfono Fijo: 11 4749-6979</p>
+            <p class="mb-2"><i data-feather="mail" class="inline mr-2"></i>Email: torrecillasblancas@gmail.com</p>
+            <p class="mb-4"><i data-feather="map-pin" class="inline mr-2"></i>Dirección: Estrada 650, Tigre, Buenos Aires</p>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3285.771468094499!2d-58.58959468477125!3d-34.415891980521496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb5d7c6f8de2f%3A0x305a520b00000000!2sEstrada%20650%2C%20Tigre%2C%20Buenos%20Aires!5e0!3m2!1sen!2sar!4v1623456789012!5m2!1sen!2sar" 
+                    width="100%" 
+                    height="200" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    class="rounded-lg">
+            </iframe>
+        </div>
+    </section>
+    </main>
+
+     <!-- Footer (Con fuentes unificadas) -->
+    <footer class="text-white py-8 text-center" style="background-color: #000000;">
+        <div class="max-w-4xl mx-auto px-4">
+            <!-- Título del Hostal usa Playfair Display (h3) -->
+            <h3 class="text-2xl font-bold mb-2" style="font-family: 'Playfair Display', serif;">Torrecillas Blancas Hostal</h3>
+            <!-- Texto inferior usa Poppins (p) -->
+            <p class="text-sm opacity-80" style="font-family: 'Poppins', sans-serif;">&copy; 2025 Hostal Torrecillas Blancas - Atendido por sus dueños</p>
+        </div>
+    </footer>
+
+    <!-- MODAL de la Galería Pop-up (Único para todas las habitaciones) -->
+    <div id="imageModal" class="modal" onclick="closeModal(event)">
+        <span class="close" title="Cerrar Modal" onclick="closeModal(event)">&times;</span>
+        <div class="modal-content">
+            <img class="modal-image" id="modalImage">
+            <a class="prev" onclick="plusSlides(-1, event)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1, event)">&#10095;</a>
+            <div class="thumbnail-container" id="thumbnailContainer">
+                <!-- Las miniaturas se insertarán aquí con JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        feather.replace();
+    </script>
+    
+    <script>
+        // --- LÓGICA DEL MENÚ HAMBURGUESA ---
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        function toggleMobileMenu() {
+            const isOpen = mobileMenu.classList.toggle('open');
+            // Cambiar el ícono de menú a X y viceversa
+            menuIcon.setAttribute('data-feather', isOpen ? 'x' : 'menu');
+            feather.replace();
+            // Evitar scroll del cuerpo cuando el menú está abierto
+            document.body.style.overflow = isOpen ? 'hidden' : 'auto'; 
+        }
+
+        function closeMobileMenu() {
+            // Cierra el menú y restablece el ícono
+            mobileMenu.classList.remove('open');
+            menuIcon.setAttribute('data-feather', 'menu');
+            feather.replace();
+            document.body.style.overflow = 'auto';
+        }
+
+        menuButton.addEventListener('click', toggleMobileMenu);
+
+        // --- DATA DE LA GALERÍA (FÁCIL DE EDITAR) ---
+        // Aquí puedes cambiar fácilmente las URLs de las fotos para cada habitación.
+        const roomData = {
+            'delta': {
+                name: 'Suite Delta',
+                images: [
+                    './images/suite-delta-1.jpeg',
+                    './images/suite-delta-2.jpeg',
+                    './images/suite-delta-3.jpeg',
+                    './images/suite-delta-4.jpeg'
+                ]
+            },
+            'rincon': {
+                name: 'Rincón Isleño',
+                images: [
+                    './images/rincon-1.jpeg',
+                    './images/rincon-2.jpeg',
+                    './images/rincon-3.jpeg',
+                    './images/rincon-4.jpeg'
+                ]
+            },
+            'refugio': {
+                name: 'Refugio del Puerto',
+                images: [
+                    './images/refugio-1.jpeg',
+                    './images/refugio-2.jpeg',
+                    './images/refugio-3.jpeg',
+                    './images/refugio-4.jpeg'
+                ]
+            }
+        };
+
+        let currentRoomId = null;
+        let slideIndex = 0;
+        
+        // Función para abrir el modal
+        function openModal(roomId, initialIndex) {
+            // Detener el scroll del cuerpo para que solo el modal se desplace
+            document.body.style.overflow = "hidden";
+            
+            currentRoomId = roomId;
+            slideIndex = initialIndex;
+
+            // Mostrar el modal
+            document.getElementById('imageModal').style.display = 'block';
+
+            // Cargar miniaturas
+            loadThumbnails();
+
+            // Mostrar la imagen inicial
+            showSlides(slideIndex);
+        }
+
+        // Función para cerrar el modal
+        function closeModal(event) {
+            // Solo cerrar si se hace clic en el botón de cerrar o en el fondo oscuro
+            if (event.target.id === 'imageModal' || event.target.className === 'close') {
+                document.body.style.overflow = "auto";
+                document.getElementById('imageModal').style.display = "none";
+            }
+        }
+
+        // Función para cargar las miniaturas
+        function loadThumbnails() {
+            const container = document.getElementById('thumbnailContainer');
+            container.innerHTML = ''; // Limpiar miniaturas anteriores
+            const images = roomData[currentRoomId].images;
+
+            images.forEach((url, index) => {
+                const img = document.createElement('img');
+                img.src = url;
+                img.alt = `Foto ${index + 1} de la habitación`;
+                img.className = 'thumbnail rounded-md';
+                img.onclick = (e) => {
+                    // Prevenir que el click se propague al fondo del modal y lo cierre
+                    e.stopPropagation(); 
+                    currentSlide(index);
+                };
+                container.appendChild(img);
+            });
+        }
+
+        // Navegación de la galería (flechas)
+        function plusSlides(n, event) {
+            event.stopPropagation(); // Prevenir que el click se propague al fondo del modal y lo cierre
+            showSlides(slideIndex += n);
+        }
+
+        // Navegación de la galería (miniaturas)
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        // Lógica principal para mostrar la imagen
+        function showSlides(n) {
+            const images = roomData[currentRoomId].images;
+            const modalImage = document.getElementById('modalImage');
+            const thumbnails = document.querySelectorAll('#thumbnailContainer .thumbnail');
+
+            // Ajustar el índice si se sale de los límites
+            if (n >= images.length) {
+                slideIndex = 0;
+            } else if (n < 0) {
+                slideIndex = images.length - 1;
+            }
+
+            // Actualizar la imagen principal
+            modalImage.src = images[slideIndex];
+
+            // Quitar la clase 'active-thumb' de todas las miniaturas
+            thumbnails.forEach(thumb => thumb.classList.remove('active-thumb'));
+
+            // Añadir la clase 'active-thumb' a la miniatura actual
+            if (thumbnails.length > 0) {
+                thumbnails[slideIndex].classList.add('active-thumb');
+                // Scroll horizontal para asegurar que la miniatura activa sea visible
+                thumbnails[slideIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            }
+        }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+    <script>new WOW().init();</script>
+
+    <!-- Google Analytics (replace GA_MEASUREMENT_ID with actual ID) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+</body>
+</html>
